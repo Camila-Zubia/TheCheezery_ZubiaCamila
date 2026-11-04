@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import zubia.camila.thecheezery.utilities.Brighter_Pink
+import zubia.camila.thecheezery.utilities.Dusty_white
 
 @Composable
 fun InputLogin(onEntrarClick: ()-> Unit){
@@ -32,8 +33,9 @@ fun InputLogin(onEntrarClick: ()-> Unit){
             state = TextFieldState(), label= { Text("Contraseña")})
         Spacer(Modifier.size(20.dp))
         Button(onEntrarClick,
-            colors = ButtonColors(Brighter_Pink, Color.White,
-                Brighter_Pink, Color.White)){
+            colors = ButtonColors(Brighter_Pink, Dusty_white,
+                Brighter_Pink, Dusty_white
+            )){
             Text("Entrar")
         }
     }
