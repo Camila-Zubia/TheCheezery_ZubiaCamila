@@ -32,7 +32,7 @@ fun WelcomeBanner(onStartedClick: ()-> Unit){
                 style = Typography.bodyLarge, color = Dusty_white, fontStyle = FontStyle.Italic)
         }
         Row(Modifier.fillMaxWidth(), Arrangement.Center) {
-            Button(onClick = {}, colors = ButtonColors(containerColor = Brighter_Pink,
+            Button(onClick = onStartedClick, colors = ButtonColors(containerColor = Brighter_Pink,
                 contentColor = Dusty_white, disabledContentColor = Dusty_white,
                 disabledContainerColor = Brighter_Pink)) {
                 Text("Get started!")

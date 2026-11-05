@@ -13,26 +13,35 @@ import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.SecureTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import zubia.camila.thecheezery.viewmodel.ClientViewModel
 import zubia.camila.thecheezery.utilities.Brighter_Pink
 import zubia.camila.thecheezery.utilities.Dusty_white
 
 @Composable
-fun InputLogin(onEntrarClick: ()-> Unit){
+fun InputLogin(viewModel: ClientViewModel, onEntrarClick: ()-> Unit){
+    val emailState = rememberTextFieldState(viewModel.email)
+    val passwordState = rememberTextFieldState(viewModel.password)
     Column(Modifier.fillMaxWidth().padding(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween) {
-        TextField(state = TextFieldState(), label = { Text("Correo electrónico") }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email))
+        TextField(state = emailState, label = { Text("Correo electrónico") }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email))
         Spacer(Modifier.size(20.dp))
         SecureTextField(keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            state = TextFieldState(), label= { Text("Contraseña")})
+            state = passwordState, label= { Text("Contraseña")})
         Spacer(Modifier.size(20.dp))
-        Button(onEntrarClick,
+        viewModel.loginError?.let { Text(it, color = androidx.compose.material3.MaterialTheme.colorScheme.error) }
+        Button(onClick = {
+            viewModel.updateEmail(emailState.text.toString())
+            viewModel.updatePassword(passwordState.text.toString())
+            if (viewModel.validateLogin()) onEntrarClick()
+        },
             colors = ButtonColors(Brighter_Pink, Dusty_white,
                 Brighter_Pink, Dusty_white
             )){

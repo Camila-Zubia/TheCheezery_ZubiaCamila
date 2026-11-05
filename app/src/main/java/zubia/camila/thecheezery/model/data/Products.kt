@@ -1,6 +1,11 @@
 package zubia.camila.thecheezery.model.data
 
 import zubia.camila.thecheezery.R
+import zubia.camila.thecheezery.components.BannerColdDrinks
+import zubia.camila.thecheezery.components.BannerCombos
+import zubia.camila.thecheezery.components.BannerHotDrinks
+import zubia.camila.thecheezery.components.BannerSalties
+import zubia.camila.thecheezery.components.BannerSweets
 import zubia.camila.thecheezery.model.dominio.Product
 
 val coldDrinks =  listOf<Product>(
@@ -127,3 +132,15 @@ val salties = listOf(
         "Tortilla chips layered with beef and melted cheddar cheese. Served with fried beans, guacamole, pico de gallo, and sour topping."
     )
 )
+
+fun GetListByType(type: String): List<Product>{
+    return when(type){
+        "salties" -> salties
+        "hot" -> hotDrinks
+        "sweets" -> sweets
+        "cold" -> coldDrinks
+        else -> {
+            listOf()
+        }
+    }
+}

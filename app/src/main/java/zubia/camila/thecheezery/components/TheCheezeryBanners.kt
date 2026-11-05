@@ -2,6 +2,7 @@ package zubia.camila.thecheezery.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,10 +27,10 @@ fun CheezeryBanner(){
 }
 
 @Composable
-fun CheezeryBannerCupcake(){
+fun CheezeryBannerCupcake(onCartClick: () -> Unit = {}){
     Column(Modifier.fillMaxWidth().padding(45.dp)) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-            Box(Modifier.background(color = Less_Purple, shape = CircleShape).size(40.dp), contentAlignment = Alignment.Center) {
+            Box(Modifier.background(color = Less_Purple, shape = CircleShape).size(40.dp).clickable(onClick = onCartClick), contentAlignment = Alignment.Center) {
                 Image(painterResource(R.drawable.cart), contentDescription = "carrito de compras")
             }
         }
