@@ -1,146 +1,35 @@
 package zubia.camila.thecheezery.model.data
 
 import zubia.camila.thecheezery.R
-import zubia.camila.thecheezery.components.BannerColdDrinks
-import zubia.camila.thecheezery.components.BannerCombos
-import zubia.camila.thecheezery.components.BannerHotDrinks
-import zubia.camila.thecheezery.components.BannerSalties
-import zubia.camila.thecheezery.components.BannerSweets
-import zubia.camila.thecheezery.model.dominio.Product
+import zubia.camila.thecheezery.model.data.database.Product
 
-val coldDrinks =  listOf<Product>(
-    Product(
-        "Caramel Frap",
-        5.0f,
-        R.drawable.caramel_frap,
-        "Caramel syrup meets coffee, milk and ice and whipped cream and buttery caramel sauce layer the love on top."
-    ),
-    Product(
-        "Chocolate Frap",
-        6f,
-        R.drawable.chocolate_frap,
-        "Rich mocha-flavored sauce meets up with chocolaty chips, milk and ice for a blender bash."
-    ),
-    Product(
-        "Cold Brew",
-        3f,
-        R.drawable.coldbrew,
-        "Created by steeping medium-to-coarse ground coffee in room temperature water for 12 hours or longer."
-    ),
-    Product(
-        "Matcha Latte",
-        4f,
-        R.drawable.matcha,
-        "Leafy taste of matcha green tea powder with creamy milk and a little sugar for a flavor balance that will leave you feeling ready and raring to go."
-    ),
-    Product(
-        "Oreo Milkshake",
-        7f,
-        R.drawable.oreomilkshake,
-        "Chocolate ice cream, and oreo cookies. Topped with whipped cream with cocoa and chocolate syrup.",
-    ),
-    Product(
-        "Peanut Milkshake",
-        7f,
-        R.drawable.peanutmilkshake,
-        "Vanilla ice cream, mixed with peanut butter and chocolate."
+object InitialProducts {
+    fun all(): List<Product> = listOf(
+        Product(name = "Caramel Frap", price = 5.0f, image = R.drawable.caramel_frap, description = "Caramel syrup meets coffee, milk and ice and whipped cream and buttery caramel sauce layer the love on top.", category = "cold"),
+        Product(name = "Chocolate Frap", price = 6f, image = R.drawable.chocolate_frap, description = "Rich mocha-flavored sauce meets up with chocolaty chips, milk and ice for a blender bash.", category = "cold"),
+        Product(name = "Cold Brew", price = 3f, image = R.drawable.coldbrew, description = "Created by steeping medium-to-coarse ground coffee in room temperature water for 12 hours or longer.", category = "cold"),
+        Product(name = "Matcha Latte", price = 4f, image = R.drawable.matcha, description = "Leafy taste of matcha green tea powder with creamy milk and a little sugar.", category = "cold"),
+        Product(name = "Oreo Milkshake", price = 7f, image = R.drawable.oreomilkshake, description = "Chocolate ice cream, and oreo cookies.", category = "cold"),
+        Product(name = "Peanut Milkshake", price = 7f, image = R.drawable.peanutmilkshake, description = "Vanilla ice cream, mixed with peanut butter and chocolate.", category = "cold"),
+
+        Product(name = "Latte", price = 6f, image = R.drawable.latte, description = "Coffee drink made with espresso and steamed milk", category = "hot"),
+        Product(name = "Hot chocolate", price = 5f, image = R.drawable.hotchocolate, description = "Heated drink consisting of shaved chocolate, topped with marshmallows.", category = "hot"),
+        Product(name = "Espresso", price = 4f, image = R.drawable.espresso, description = "Full-flavored, concentrated form of coffee.", category = "hot"),
+        Product(name = "Chai Latte", price = 6f, image = R.drawable.chailatte, description = "Spiced tea concentrate with milk", category = "hot"),
+        Product(name = "Capuccino", price = 7f, image = R.drawable.capuccino, description = "A cappuccino is an espresso-based coffee drink, prepared with steamed foam.", category = "hot"),
+        Product(name = "American coffee", price = 2f, image = R.drawable.americano, description = "Espresso with hot water", category = "hot"),
+
+        Product(name = "Blueberry cake", price = 6f, image = R.drawable.blueberrycake, description = "Vanilla cake flavor, topped with cheese topping and blueberries.", category = "sweets"),
+        Product(name = "Chocolate cupcake", price = 3f, image = R.drawable.chocolatecupcake, description = "Chocolate cupcakes topped with butter cream and cherries", category = "sweets"),
+        Product(name = "Lemon tartalette", price = 4f, image = R.drawable.lemontartalette, description = "Pastry shell with a lemon flavored filling", category = "sweets"),
+        Product(name = "Red Velvet cake", price = 6f, image = R.drawable.redvelvetcake, description = "Soft, moist, buttery cake topped with an easy cream cheese frosting.", category = "sweets"),
+        Product(name = "Cherry cheesecake", price = 7f, image = R.drawable.strawberrycheesecake, description = "This cherry topped cheesecake is positively creamy and delicious.", category = "sweets"),
+        Product(name = "Tiramisu", price = 6f, image = R.drawable.tiramisu, description = "Coffee-flavored Italian dessert", category = "sweets"),
+
+        Product(name = "Chicken crepes", price = 6f, image = R.drawable.chickencrepes, description = "Fine crepes stuffed with Alfredo chicken, spinach and mushrooms.", category = "salties"),
+        Product(name = "Club Sandwich", price = 5f, image = R.drawable.clubsandwich, description = "A delicious sandwich served with french fries.", category = "salties"),
+        Product(name = "Panini", price = 4f, image = R.drawable.ic_panini, description = "Sandwich made with Italian bread served warmed by grilling.", category = "salties"),
+        Product(name = "Philly cheese steak", price = 6f, image = R.drawable.phillycheesesteak, description = "Smothered in grilled onions, green peppers, mushrooms, and Provolone.", category = "salties"),
+        Product(name = "Nachos", price = 7f, image = R.drawable.nachos, description = "Tortilla chips layered with beef and melted cheddar cheese.", category = "salties")
     )
-)
-
-val hotDrinks = listOf(
-    Product("Latte", 6F, R.drawable.latte, "Coffee drink made with espresso and steamed milk"),
-    Product(
-        "Hot chocolate",
-        5F,
-        R.drawable.hotchocolate,
-        "Heated drink consisting of shaved chocolate, topped with marshmallows."
-    ),
-    Product("Espresso", 4F, R.drawable.espresso, "Full-flavored, concentrated form of coffee."),
-    Product("Chai Latte", 6F, R.drawable.chailatte, "Spiced tea concentrate with milk"),
-    Product(
-        "Capuccino",
-        7F,
-        R.drawable.capuccino,
-        "A cappuccino is an espresso-based coffee drink, prepared with steamed foam."
-    ),
-    Product("American coffee", 2F, R.drawable.americano, "Espresso with hot water")
-)
-
-val sweets = listOf(
-    Product(
-        "Blueberry cake",
-        6F,
-        R.drawable.blueberrycake,
-        "Vanilla cake flavor, topped with cheese topping and blueberries."
-    ),
-    Product(
-        "Chocolate cupcake",
-        3F,
-        R.drawable.chocolatecupcake,
-        "Chocolate cupcakes topped with butter cream and cherries"
-    ),
-    Product(
-        "Lemon tartalette",
-        4F,
-        R.drawable.lemontartalette,
-        "Pastry shell with a lemon flavored filling"
-    ),
-    Product(
-        "Red Velvet cake",
-        6F,
-        R.drawable.redvelvetcake,
-        "Soft, moist, buttery cake topped with an easy cream cheese frosting."
-    ),
-    Product(
-        "Cherry cheesecake",
-        7F,
-        R.drawable.strawberrycheesecake,
-        "This cherry topped cheesecake is positively creamy and delicious and will be your new favorite dessert."
-    ),
-    Product("Tiramisu", 6F, R.drawable.tiramisu, "Coffee-flavored Italian dessert")
-)
-
-val salties = listOf(
-    Product(
-        "Chicken crepes",
-        6F,
-        R.drawable.chickencrepes,
-        "Fine crepes stuffed with Alfredo chicken, spinach and mushrooms."
-    ),
-    Product(
-        "Club Sandwich",
-        5F,
-        R.drawable.clubsandwich,
-        "A delicious sandwich served with french fries."
-    ),
-    Product(
-        "Panini",
-        4F,
-        R.drawable.ic_panini,
-        "Sandwich made with Italian bread served warmed by grilling."
-    ),
-    Product(
-        "Philly cheese steak",
-        6F,
-        R.drawable.phillycheesesteak,
-        "Smothered in grilled onions, green peppers, mushrooms, and Provolone."
-    ),
-    Product(
-        "Nachos",
-        7F,
-        R.drawable.nachos,
-        "Tortilla chips layered with beef and melted cheddar cheese. Served with fried beans, guacamole, pico de gallo, and sour topping."
-    )
-)
-
-fun GetListByType(type: String): List<Product>{
-    return when(type){
-        "salties" -> salties
-        "hot" -> hotDrinks
-        "sweets" -> sweets
-        "cold" -> coldDrinks
-        else -> {
-            listOf()
-        }
-    }
 }

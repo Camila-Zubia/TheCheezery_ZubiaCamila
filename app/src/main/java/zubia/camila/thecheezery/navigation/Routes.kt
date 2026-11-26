@@ -17,3 +17,6 @@ data class ListaMenu(val opcion: String)
 
 @Serializable
 object Order
+
+@Serializable
+object AddCombo

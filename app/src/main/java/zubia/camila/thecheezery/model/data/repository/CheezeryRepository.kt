@@ -2,6 +2,7 @@ package zubia.camila.thecheezery.model.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import zubia.camila.thecheezery.model.data.database.AppDatabase
+import zubia.camila.thecheezery.model.data.database.ComboWithProducts
 import zubia.camila.thecheezery.model.data.database.Product
 import zubia.camila.thecheezery.model.data.database.entity.Combo
 import zubia.camila.thecheezery.model.data.database.entity.ProductCombo
@@ -92,5 +93,23 @@ class CheezeryRepository(private val database: AppDatabase){
 
     fun searchProductCombos(name: String): Flow<List<ProductCombo>>{
         return productComboDao.searchProductCombos(name)
+    }
+    fun getCombosWithProducts(): Flow<List<ComboWithProducts>> =
+        comboDao.getCombosWithProducts()
+
+    suspend fun createComboWithProducts(
+        name: String,
+        price: Float,
+        productIds: List<Int>
+    ): Long {
+        val comboId = comboDao.insertCombo(Combo(name = name, price = price)).toInt()
+        val relations = productIds.distinct().map { productId ->
+            ProductCombo(
+                idProduct = productId,
+                idCombo = comboId
+            )
+        }
+        productComboDao.insertProductCombos(relations)
+        return comboId.toLong()
     }
 }

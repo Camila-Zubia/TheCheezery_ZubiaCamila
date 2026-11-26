@@ -21,9 +21,3 @@ fun LoginScreen(innerPadding: PaddingValues, viewModel: ClientViewModel, onEntra
         InputLogin(viewModel, onEntrarClick)
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewLoginScreen(){
-    LoginScreen(PaddingValues(), ClientViewModel(), {})
-}

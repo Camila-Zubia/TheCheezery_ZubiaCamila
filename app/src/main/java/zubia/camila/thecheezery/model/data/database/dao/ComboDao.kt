@@ -5,8 +5,10 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
+import zubia.camila.thecheezery.model.data.database.ComboWithProducts
 import zubia.camila.thecheezery.model.data.database.entity.Combo
 
 @Dao
@@ -31,4 +33,8 @@ interface ComboDao {
 
     @Query("SELECT * FROM Combos WHERE nameCombo LIKE '%' || :name || '%'")
     fun searchCombos(name: String): Flow<List<Combo>>
+
+    @Transaction
+    @Query("SELECT * FROM Combos")
+    fun getCombosWithProducts(): Flow<List<ComboWithProducts>>
 }

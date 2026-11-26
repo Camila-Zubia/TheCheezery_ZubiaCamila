@@ -1,13 +1,41 @@
 package zubia.camila.thecheezery.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import zubia.camila.thecheezery.model.data.GetListByType
-import zubia.camila.thecheezery.model.dominio.Product
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import zubia.camila.thecheezery.model.data.InitialProducts
+import zubia.camila.thecheezery.model.data.database.AppDatabase
+import zubia.camila.thecheezery.model.data.database.ComboWithProducts
+import zubia.camila.thecheezery.model.data.database.Product
+import zubia.camila.thecheezery.model.data.repository.CheezeryRepository
 
-class ClientViewModel : ViewModel() {
+class ClientViewModel(
+    private val repository: CheezeryRepository
+) : ViewModel() {
+
+    companion object {
+        fun Factory(context: Context): ViewModelProvider.Factory =
+            object : ViewModelProvider.Factory {
+                @Suppress("UNCHECKED_CAST")
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    if (modelClass.isAssignableFrom(ClientViewModel::class.java)) {
+                        val database = AppDatabase.getInstance(context.applicationContext)
+                        val repository = CheezeryRepository(database)
+                        return ClientViewModel(repository) as T
+                    }
+                    throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+                }
+            }
+    }
+
     var cart by mutableStateOf<List<Product>>(emptyList())
         private set
 
@@ -18,7 +46,33 @@ class ClientViewModel : ViewModel() {
     var loginError by mutableStateOf<String?>(null)
         private set
 
+    val products: StateFlow<List<Product>> = repository.getAllProducts()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = emptyList()
+        )
+
+    val combosWithProducts: StateFlow<List<ComboWithProducts>> = repository.getCombosWithProducts()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = emptyList()
+        )
+
     val total: Float get() = cart.sumOf { it.price.toDouble() }.toFloat()
+
+    init {
+        seedInitialProductsIfEmpty()
+    }
+
+    private fun seedInitialProductsIfEmpty() {
+        viewModelScope.launch {
+            if (repository.getAllProducts().stateIn(viewModelScope).value.isEmpty()) {
+                repository.insertProducts(InitialProducts.all())
+            }
+        }
+    }
 
     fun updateEmail(value: String) { email = value }
     fun updatePassword(value: String) { password = value }
@@ -32,11 +86,24 @@ class ClientViewModel : ViewModel() {
         return loginError == null
     }
 
-    fun addProduct(product: Product) { cart = cart + product }
-
-    fun removeProduct(index: Int) {
-        if (index in cart.indices) cart = cart.toMutableList().also { it.removeAt(index) }
+    fun addProduct(product: Product) {
+        cart = cart + product
     }
 
-    fun productsFor(type: String): List<Product> = GetListByType(type)
+    fun removeProduct(index: Int) {
+        if (index in cart.indices) {
+            cart = cart.toMutableList().also { it.removeAt(index) }
+        }
+    }
+
+    fun saveCombo(name: String, price: Float, productIds: List<Int>, onSuccess: () -> Unit = {}) {
+        viewModelScope.launch {
+            repository.createComboWithProducts(
+                name = name.trim(),
+                price = price,
+                productIds = productIds
+            )
+            onSuccess()
+        }
+    }
 }

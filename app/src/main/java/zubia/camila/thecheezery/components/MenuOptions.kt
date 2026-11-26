@@ -9,15 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
-import zubia.camila.thecheezery.model.dominio.Product
 import zubia.camila.thecheezery.utilities.Brighter_Pink
 import zubia.camila.thecheezery.utilities.Dusty_white
 import zubia.camila.thecheezery.utilities.Less_Purple
@@ -26,7 +21,7 @@ import zubia.camila.thecheezery.utilities.Very_purple
 import kotlin.collections.listOf
 
 @Composable
-fun MenuOptions(onSelectOption: (opcion: String) -> Unit){
+fun MenuOptions(onSelectOption: (opcion: String) -> Unit, onCreateCombo: () -> Unit){
     Row(Modifier.fillMaxWidth().padding(horizontal = 40.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         Column(Modifier.weight(1f).background(brush = Brush.verticalGradient(colors = listOf(Brighter_Pink, Pinky,
             Less_Purple, Very_purple))).padding(15.dp),
@@ -38,7 +33,7 @@ fun MenuOptions(onSelectOption: (opcion: String) -> Unit){
             Row(Modifier.clickable(onClick = { onSelectOption("salties") }), horizontalArrangement = Arrangement.Center) {
                 Text("Salties", color = Dusty_white)
             }
-            Row(Modifier.clickable(onClick = { onSelectOption("combos") }), horizontalArrangement = Arrangement.Center) {
+            Row(Modifier.clickable(onClick = onCreateCombo), horizontalArrangement = Arrangement.Center) {
                 Text("Combos", color = Dusty_white)
             }
         }

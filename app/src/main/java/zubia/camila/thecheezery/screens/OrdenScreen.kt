@@ -11,14 +11,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import zubia.camila.thecheezery.components.ListaOrden
 import zubia.camila.thecheezery.components.fontHelloBunny
-import zubia.camila.thecheezery.model.data.sweets
-import zubia.camila.thecheezery.model.dominio.Product
+import zubia.camila.thecheezery.model.data.database.Product
 import zubia.camila.thecheezery.ui.theme.Typography
 import zubia.camila.thecheezery.utilities.Pinky
 import zubia.camila.thecheezery.utilities.Very_purple
@@ -39,8 +36,3 @@ fun OrderScreen(innerPadding: PaddingValues, orden: List<Product>, total: Float 
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewOrderScreen(){
-    OrderScreen(PaddingValues(), sweets)
-}

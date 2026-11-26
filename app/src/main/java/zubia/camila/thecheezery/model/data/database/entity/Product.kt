@@ -14,8 +14,10 @@ data class Product(
     @ColumnInfo(name = "priceProduct")
     val price: Float,
     @ColumnInfo(name = "imageProduct")
-    val image: String? = null,
+    val image: Int? = null,
     @ColumnInfo(name = "descriptionProduct")
-    val description: String
+    val description: String? = null,
+    @ColumnInfo(name = "categoryProduct")
+    val category: String = ""
 )
 

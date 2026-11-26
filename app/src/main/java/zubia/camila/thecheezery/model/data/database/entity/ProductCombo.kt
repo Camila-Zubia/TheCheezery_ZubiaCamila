@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import zubia.camila.thecheezery.model.dominio.Product
+import zubia.camila.thecheezery.model.data.database.Product
 
 @Entity(
     tableName = "ProductsCombo",
@@ -33,8 +33,8 @@ data class ProductCombo(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "idProductCombo")
     val id: Int = 0,
-    @ColumnInfo(name = "nameProductCombo")
-    val name: String,
-    @ColumnInfo(name = "priceProductCombo")
-    val price: Float
+    @ColumnInfo(name = "idProduct")
+    val idProduct: Int,
+    @ColumnInfo(name = "idCombo")
+    val idCombo: Int
 )

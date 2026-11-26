@@ -10,15 +10,16 @@ import zubia.camila.thecheezery.components.CheezeryBannerCupcake
 import zubia.camila.thecheezery.components.MenuOptions
 
 @Composable
-fun MenuScreen(innerPadding: PaddingValues, onSelectOption: (opcion: String) -> Unit, onCartClick: () -> Unit = {}){
+fun MenuScreen(innerPadding: PaddingValues, onSelectOption: (opcion: String) -> Unit, onCartClick: () -> Unit = {},
+               onCreateCombo: () -> Unit){
     Column(Modifier.fillMaxSize()) {
         CheezeryBannerCupcake(onCartClick)
-        MenuOptions(onSelectOption)
+        MenuOptions(onSelectOption, onCreateCombo)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun MenuScreensPreview(){
-    MenuScreen(PaddingValues(), {})
+    MenuScreen(PaddingValues(), {}, {}, {})
 }

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.Text
@@ -19,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import zubia.camila.thecheezery.R
-import zubia.camila.thecheezery.model.dominio.Product
+import zubia.camila.thecheezery.model.data.database.Product
 import zubia.camila.thecheezery.ui.theme.PurpleGrey40
 import zubia.camila.thecheezery.ui.theme.Typography
 import zubia.camila.thecheezery.utilities.DisabledGrey

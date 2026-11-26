@@ -1,7 +1,0 @@
-package zubia.camila.thecheezery.model.dominio
-
-data class Product(val name: String = "",
-                   val price: Float = 0F,
-                   val image: Int,
-                   val description: String? = null
-)
